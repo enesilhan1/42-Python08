@@ -1,5 +1,6 @@
 import sys
 import site
+import os
 
 
 def is_it_venv() -> bool:
@@ -7,6 +8,12 @@ def is_it_venv() -> bool:
 
 
 def main() -> None:
+    package: list[str] = []
+    try:
+        package = site.getsitepackages()
+    except Exception:
+        pass
+
     if not is_it_venv():
         print("MATRIX STATUS: You're still plugged in")
 
@@ -23,7 +30,21 @@ def main() -> None:
 
         print("Then run this program again")
 
+        print("\nGlobal package installation path:")
+        print("\n".join(package) if package else "Unavailable")
+    else:
+        venv: str = os.path.basename(sys.prefix)
+        print("MATRIX STATUS: Welcome to the construct")
 
+        print(f"\nCurrent Python: {sys.executable}")
+        print(f"Virtual Environment: {venv}")
+        print(f"Environment Path: {sys.prefix}")
+
+        print("\nSUCCESS: You're in an isolated environment!")
+        print("Safe to install packages without affecting the global system.")
+
+        print("\nPackage installation path:")
+        print("\n".join(package) if package else "Unavailable")
 
 
 if __name__ == "__main__":
