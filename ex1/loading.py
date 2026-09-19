@@ -25,3 +25,23 @@ def check_dependencies() -> list[str]:
     return missings
 
 
+def print_install_instructions() -> None:
+    print("\nInstalling with pip")
+    print("pip install -r requirements.txt")
+
+    print("\nInstalling with Poetry")
+    print("poetry install")
+    print("poetry run python loading.py")
+
+
+def main() -> None:
+    print("LOADING STATUS: Loading programs...")
+    print("\nChecking dependencies:")
+    missing = check_dependencies()
+    if missing:
+        print_install_instructions()
+        return
+
+
+if __name__ == "__main__":
+    main()
