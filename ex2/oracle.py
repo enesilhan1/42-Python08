@@ -1,4 +1,5 @@
 import os
+import sys
 from dotenv import load_dotenv
 
 def load_config() -> dict[str, str | None]:
@@ -22,3 +23,23 @@ def validate_config(config: dict[str, str | None]) -> list[str]:
         errors.append("ZION_ENDPOINT is not set.")
     return errors
 
+def print_config(config: dict[str, str | None]) -> None:
+    print("\nConfiguration loaded:")
+    print(f"Mode: {config['MATRIX_MODE']}")
+
+    if config["DATABASE_URL"]:
+        print("Database: Connected")
+    else:
+        print("Database: Not configured")
+
+    if config["API_KEY"]:
+        print("API Access: Authenticated")
+    else:
+        print("API Access: Missing key")
+
+    print(f"Log Level: {config['LOG_LEVEL']}")
+
+    if config["ZION_ENDPOINT"]:
+        print("Zion Network: Online")
+    else:
+        print("Zion Network: Offline")  
