@@ -12,3 +12,13 @@ def load_config() -> dict[str, str | None]:
     }
     return config
 
+def validate_config(config: dict[str, str | None]) -> list[str]:
+    errors: list[str] = []
+    if not config["DATABASE_URL"]:
+        errors.append("DATABASE_URL is not set.")
+    if not config["API_KEY"]:
+        errors.append("API_KEY is not set.")
+    if not config["ZION_ENDPOINT"]:
+        errors.append("ZION_ENDPOINT is not set.")
+    return errors
+
