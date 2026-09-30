@@ -43,3 +43,17 @@ def print_config(config: dict[str, str | None]) -> None:
         print("Zion Network: Online")
     else:
         print("Zion Network: Offline")  
+
+def main():
+    print("ORACLE STATUS: Reading the Matrix...")
+    config = load_config()
+    errors = validate_config(config)
+    if errors:
+        for error in errors:
+            print(f"Configuration Error: {error}")
+        if config["MATRIX_MODE"] == "production":
+            print("Cannot start in production without full configuration.")
+            sys.exit(1)
+        else:
+            print("Running in development mode with incomplete configuration.")
+    print_config(config)
