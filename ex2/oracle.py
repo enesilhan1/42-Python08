@@ -57,3 +57,6 @@ def main():
         else:
             print("Running in development mode with incomplete configuration.")
     print_config(config)
+
+if __name__ == "__main__":
+    main()
